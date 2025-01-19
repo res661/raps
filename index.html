@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Александр Калинков - Фрешмен в рэпе</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        #about {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        #about-text {
+            flex: 1;
+        }
+
+        #stats {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .stat {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+        }
+
+        .stat h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .stat p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        #streaming-stats {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .chart-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        #gallery {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .gallery-container img {
+            width: 30%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Александр Калинков</h1>
+        <p>Фрешмен в рэпе из Одессы</p>
+    </header>
+
+    <section id="about">
+        <img src="https://i.imgur.com/vhjd3FX.jpeg" alt="Александр Калинков" class="profile-img">
+        <div id="about-text">
+            <h2>О нем</h2>
+            <p>Александр Калинков — новый голос улиц Одессы. Его уникальный стиль и харизма покоряют сердца слушателей. Свежий взгляд на рэп-сцену и неподражаемая энергия делают его одним из самых перспективных артистов.</p>
+        </div>
+    </section>
+
+    <section id="stats">
+        <h2>Статистика</h2>
+        <div class="stats-container">
+            <div class="stat">
+                <h3>Прослушивания</h3>
+                <p>1,000,000+</p>
+            </div>
+            <div class="stat">
+                <h3>Подписчики</h3>
+                <p>50,000+</p>
+            </div>
+            <div class="stat">
+                <h3>Треки</h3>
+                <p>10+</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="streaming-stats">
+        <h2>Прослушивания на платформах</h2>
+        <div class="chart-container">
+            <canvas id="streamingChart"></canvas>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Фото</h2>
+        <div class="gallery-container">
+            <img src="https://i.imgur.com/CEZr0hd.jpeg" alt="Фото 1">
+            <img src="https://i.imgur.com/YW9vWYs.jpeg" alt="Фото 2">
+            <img src="https://i.imgur.com/vhjd3FX.jpeg" alt="Фото 3">
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2023 @resgg (Telegram)</p>
+    </footer>
+
+    <script>
+        // Данные для графика
+        const streamingData = {
+            labels: ['YouTube', 'Spotify', 'TikTok'],
+            datasets: [{
+                label: 'Прослушивания',
+                data: [800000, 500000, 300000], // Пример данных
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Настройки графика
+        const streamingConfig = {
+            type: 'bar',
+            data: streamingData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Создание графика
+        const streamingChart = new Chart(
+            document.getElementById('streamingChart'),
+            streamingConfig
+        );
+
+        // Интерактивность для фото в галерее
+        document.querySelectorAll('.gallery-container img').forEach(img => {
+            img.addEventListener('mouseover', () => {
+                img.style.transform = 'scale(1.1)';
+            });
+
+            img.addEventListener('mouseout', () => {
+                img.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
