@@ -107,6 +107,82 @@
             transition: transform 0.3s;
         }
 
+        #media {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .media-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .media-container img {
+            width: 45%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        #news {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .news-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .news-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #events {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .events-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .event-item {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+        }
+
+        #reviews {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .reviews-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .review-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         footer {
             background-color: #333;
             color: #fff;
@@ -138,15 +214,15 @@
         <div class="stats-container">
             <div class="stat">
                 <h3>Прослушивания</h3>
-                <p>1,000,000+</p>
+                <p id="streams">0</p>
             </div>
             <div class="stat">
                 <h3>Подписчики</h3>
-                <p>50,000+</p>
+                <p id="subscribers">0</p>
             </div>
             <div class="stat">
                 <h3>Треки</h3>
-                <p>10+</p>
+                <p id="tracks">10+</p>
             </div>
         </div>
     </section>
@@ -167,11 +243,99 @@
         </div>
     </section>
 
+    <section id="media">
+        <h2>Интервью и медиа</h2>
+        <p>Александр Калинков активно участвует в интервью и медиа-проектах. Вот несколько ярких моментов:</p>
+        <div class="media-container">
+            <img src="https://i.imgur.com/cyCvNk8.jpeg" alt="Интервью 1">
+            <img src="https://i.imgur.com/ubuJEWm.jpeg" alt="Интервью 2">
+        </div>
+    </section>
+
+    <section id="news">
+        <h2>Последние новости</h2>
+        <div class="news-container">
+            <div class="news-item">
+                <h3>Новый трек</h3>
+                <p>Александр Калинков выпустил новый трек "Одесса мой город". Уже в топах Spotify!</p>
+            </div>
+            <div class="news-item">
+                <h3>Интервью на YouTube</h3>
+                <p>Смотрите новое интервью с Александром на канале "Рэп и море".</p>
+            </div>
+            <div class="news-item">
+                <h3>Концерт в Одессе</h3>
+                <p>Не пропустите концерт Александра Калинкова в Одессе 15 ноября!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="events">
+        <h2>Концерты и события</h2>
+        <div class="events-container">
+            <div class="event-item">
+                <h3>Одесса</h3>
+                <p>15 ноября 2023</p>
+            </div>
+            <div class="event-item">
+                <h3>Киев</h3>
+                <p>20 ноября 2023</p>
+            </div>
+            <div class="event-item">
+                <h3>Львов</h3>
+                <p>25 ноября 2023</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <h2>Отзывы фанатов</h2>
+        <div class="reviews-container">
+            <div class="review-item">
+                <p>"Александр — это новый уровень рэпа! Его треки зажигают!"</p>
+                <p>— Иван, Одесса</p>
+            </div>
+            <div class="review-item">
+                <p>"Слушаю его каждый день. Это просто бомба!"</p>
+                <p>— Анна, Киев</p>
+            </div>
+            <div class="review-item">
+                <p>"Лучший фрешмен в рэпе. Жду новых треков!"</p>
+                <p>— Дмитрий, Львов</p>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <p>© 2023 @resgg (Telegram)</p>
     </footer>
 
     <script>
+        // Анимация цифр
+        const animateValue = (obj, start, end, step, duration) => {
+            let current = start;
+            const interval = setInterval(() => {
+                current += step;
+                obj.textContent = current.toLocaleString(); // Форматируем число с разделителями
+                if (current >= end) {
+                    clearInterval(interval);
+                }
+            }, duration);
+        };
+
+        const streams = document.getElementById("streams");
+        const subscribers = document.getElementById("subscribers");
+
+        // Прослушивания: увеличиваются на 10 за шаг
+        animateValue(streams, 0, 1000000, 10, 10);
+
+        // Подписчики: увеличиваются на 5 за шаг
+        animateValue(subscribers, 0, 50000, 5, 20);
+
+        // Треки: фиксированное значение "10+"
+        const tracks = document.getElementById("tracks");
+        tracks.textContent = "10+";
+
         // Данные для графика
         const streamingData = {
             labels: ['YouTube', 'Spotify', 'TikTok'],
@@ -212,7 +376,7 @@
         );
 
         // Интерактивность для фото в галерее
-        document.querySelectorAll('.gallery-container img').forEach(img => {
+        document.querySelectorAll('.gallery-container img, .media-container img').forEach(img => {
             img.addEventListener('mouseover', () => {
                 img.style.transform = 'scale(1.1)';
             });
